@@ -21,8 +21,8 @@ type LoggerService interface {
 	Warningf(format string, values ...interface{})
 	Error(message string)
 	Errorf(format string, values ...interface{})
-	Fatal(message string)
-	Fatalf(format string, values ...interface{})
+	Fatal(message string, code int)
+	Fatalf(format string, code int, values ...interface{})
 }
 
 type service struct {
@@ -130,14 +130,14 @@ func (s *service) Errorf(format string, values ...interface{}) {
 	s.eventChan <- &event{fmt.Sprintf(format, values...), time.Now(), ErrorLevel}
 }
 
-func (s *service) Fatal(message string) {
+func (s *service) Fatal(message string, code int) {
 	s.print(&event{message, time.Now(), FatalLevel})
-	os.Exit(1)
+	os.Exit(code)
 }
 
-func (s *service) Fatalf(format string, values ...interface{}) {
+func (s *service) Fatalf(format string, code int, values ...interface{}) {
 	s.print(&event{fmt.Sprintf(format, values...), time.Now(), FatalLevel})
-	os.Exit(1)
+	os.Exit(code)
 }
 
 func (s *service) run() {

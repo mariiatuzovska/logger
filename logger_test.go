@@ -197,7 +197,7 @@ func Test_Fatal(t *testing.T) {
 
 	//testing os.Exit()
 	if os.Getenv("FATAL") == "1" {
-		underTest.Fatal("test fatal")
+		underTest.Fatal("test fatal", 1)
 		return
 	}
 
@@ -235,7 +235,7 @@ func Test_Fatalf(t *testing.T) {
 	//testing os.Exit()
 	if os.Getenv("FATAL") == "1" {
 		underTest.SetOutput(os.Stdout)
-		underTest.Fatalf("format %s", "fatalf")
+		underTest.Fatalf("format %s", 1, "fatalf")
 		return
 	}
 
