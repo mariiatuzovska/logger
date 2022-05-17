@@ -1,3 +1,4 @@
 # logger
 
-*stdout logger*
+`go get github.com/mariiatuzovska/logger`
+
